@@ -1,0 +1,89 @@
+buildscript {
+	ext {
+		grailsVersion = project.grailsVersion
+	}
+	repositories {
+		mavenLocal()
+		maven { url "https://repo.grails.org/grails/core" }
+	}
+	dependencies {
+		classpath "org.grails:grails-gradle-plugin:$grailsVersion"
+		classpath 'com.bertramlabs.plugins:asset-pipeline-gradle:2.5.0'
+	}
+}
+
+plugins {
+	id "io.spring.dependency-management" version "0.5.2.RELEASE"
+}
+
+version "0.1"
+group "com.laelfrog.iot"
+
+apply plugin: "spring-boot"
+apply plugin: "war"
+apply plugin: "asset-pipeline"
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: "org.grails.grails-web"
+apply plugin: "org.grails.grails-gsp"
+
+ext {
+	grailsVersion = project.grailsVersion
+	gradleWrapperVersion = project.gradleWrapperVersion
+}
+
+assets {
+	minifyJs = true
+	minifyCss = true
+}
+
+repositories {
+	mavenLocal()
+	maven { url "https://repo.grails.org/grails/core" }
+	maven { url "http://www.sparetimelabs.com/maven2" }
+	maven { url "http://dl.bintray.com/dmahapatro/plugins" }
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.grails:grails-bom:$grailsVersion"
+	}
+	applyMavenExclusions false
+}
+
+dependencies {
+	compile "org.springframework.boot:spring-boot-starter-logging"
+	compile "org.springframework.boot:spring-boot-starter-actuator"
+	compile "org.springframework.boot:spring-boot-autoconfigure"
+	compile "org.springframework.boot:spring-boot-starter-tomcat"
+	compile "org.grails:grails-dependencies"
+	compile "org.grails:grails-web-boot"
+	compile "org.grails:grails-datastore-rest-client:4.0.0.RELEASE"
+	compile "com.twilio.sdk:twilio-java-sdk:5.0.0"
+
+	compile "org.grails.plugins:hibernate"
+	compile "org.grails.plugins:cache"
+	compile "org.hibernate:hibernate-ehcache"
+	compile "org.grails.plugins:scaffolding"
+
+	compile 'com.sparetimelabs:purejavacomm:0.0.28'
+	compile "org.grails.plugins:actuator-ui:0.1"
+
+	runtime "org.grails.plugins:asset-pipeline"
+
+	testCompile "org.grails:grails-plugin-testing"
+	testCompile "org.grails.plugins:geb"
+
+	// Note: It is recommended to update to a more robust driver (Chrome, Firefox etc.)
+	testRuntime 'org.seleniumhq.selenium:selenium-htmlunit-driver:2.44.0'
+
+	console "org.grails:grails-console"
+
+
+	compile files('./libs/java-opc-f8907cad4aa4f184faa2fd4c9e1832175733e27d.jar')
+
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = gradleWrapperVersion
+}
