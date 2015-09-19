@@ -1,4 +1,4 @@
-# s2gx-2015-iot-demo-hub
+# IoT Hub 
 Demo application for Booting IoT with Grails at SpringOne2GX 2015
 https://2015.event.springone2gx.com/schedule/sessions/booting_iot_with_grails.html
 
