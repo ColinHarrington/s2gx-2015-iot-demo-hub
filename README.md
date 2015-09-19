@@ -15,5 +15,3 @@ http://slides.com/colinharrington/booting-iot-with-grails
 * SMS (Twilio)
 * XBee over Serial Device
 
-##Slides:
-http://slides.com/colinharrington/booting-iot-with-grails
